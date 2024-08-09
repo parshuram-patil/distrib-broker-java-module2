@@ -104,7 +104,7 @@ public class ZookeeperClient {
         String topicsPath = getTopicPath(topicName);
         String topicsData = JsonSerDes.toJson(partitionReplicas);
         //Assignment== Permanently store topic metadata in zookeeper.
-//        createPersistentPath(zkClient, topicsPath, topicsData);
+        createPersistentPath(zkClient, topicsPath, topicsData);
     }
 
     private void createPersistentPath(ZkClient client, String path,
@@ -144,13 +144,14 @@ public class ZookeeperClient {
     }
 
 
-    public void tryCreatingControllerPath(int controllerId) throws ControllerExistsException {
+    public void tryCreatingControllerPath(int brokerId) throws ControllerExistsException {
         try {
 
             //Assignment: Create controller path in Zookeeper..
             //Important to create an ephemeralPath which disasspears if the
             // node fails.
-            
+            createEphemeralPath(zkClient, ControllerPath,
+                    String.valueOf(brokerId));
 
         } catch (ZkNodeExistsException e) {
             String existingControllerId = zkClient.readData(ControllerPath);
