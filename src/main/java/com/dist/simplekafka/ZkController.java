@@ -50,7 +50,7 @@ public class ZkController {
      * leading to cluster inconsistencies.
      */
     public void elect() {
-        //Implement election.
+      //Implement election
     }
 
     private void onBecomingLeader() {
