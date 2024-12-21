@@ -24,13 +24,7 @@ public class ZkController {
     }
 
     public void elect() {
-        try {
-            zookeeperClient.tryCreatingControllerPath(brokerId);
-            this.currentLeader = brokerId;
-            onBecomingLeader();
-        } catch (ControllerExistsException e) {
-            this.currentLeader = e.getControllerId();
-        }
+        //Implement this.
     }
 
     private void onBecomingLeader() {
